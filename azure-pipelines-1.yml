@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - amd-mirror-2  # Trigger on commits to the 'main' branch
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: SyncRepoA
+  steps:
+  - checkout: self  # This checks out the current repository (Repo B)
+
+  - script: |
+      cat README.md
+      # Add the remote for Repo A (GitHub)
+      git remote add repo-a https://xu-robert:$(GH_TOKEN)@github.com/xu-robert/sync-2.git
+
+      # Fetch the latest changes from Repo A
+      git fetch repo-a
+
+      # Push changes from Repo B's mirror to Repo A's mirror
+      git push repo-a HEAD:refs/heads/amd-mirror-2
+    displayName: 'Mirror Repo B to Repo A'
