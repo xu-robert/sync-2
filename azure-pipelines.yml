@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main  # Trigger on commits to the 'main' branch
+      - amd-mirror  # Trigger on commits to the 'main' branch
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -14,7 +14,7 @@ jobs:
   - script: |
       cat README.md
       # Add the remote for Repo A (GitHub)
-      git remote add repo-a https://xu-robert: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@github.com/xu-robert/sync-2.git
+      git remote add repo-a https://xu-robert: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@github.com/xu-robert/sync-2.git
 
       # Fetch the latest changes from Repo A
       git fetch repo-a
